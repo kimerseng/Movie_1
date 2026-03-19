@@ -1,23 +1,32 @@
 import { movieController } from "@/src/controller/movie.contoller";
 import { NextResponse } from "next/server";
 
+// ✅ GET MOVIES (FIXED)
 export async function GET(req: Request) {
   try {
     console.log("GET /api/movies called");
 
     const { searchParams } = new URL(req.url);
     const search = searchParams.get("search");
+    const type = searchParams.get("type");
+
+    console.log("TYPE:", type);
+    console.log("SEARCH:", search);
 
     let movies;
 
-    if (search) {
-      console.log("Searching movies:", search);
+    // ✅ filter by type
+    if (type && type !== "All") {
+      movies = await movieController.filterMovies(type);
+    }
+    // ✅ search
+    else if (search) {
       movies = await movieController.searchMovies(search);
-    } else {
+    }
+    // ✅ default
+    else {
       movies = await movieController.getMovies();
     }
-
-    console.log("Movies fetched:", movies);
 
     return NextResponse.json(movies);
   } catch (error) {
@@ -33,16 +42,20 @@ export async function GET(req: Request) {
   }
 }
 
+// ✅ CREATE MOVIE (KEEP THIS)
 export async function POST(req: Request) {
   try {
     const data = await req.json();
 
-    // If a poster URL is provided, check it's a valid URL string (don't require network reachability)
+    // validate poster URL
     if (data.posterUrl) {
       try {
         new URL(String(data.posterUrl));
       } catch (err) {
-        return NextResponse.json({ message: 'Poster URL must be a valid URL' }, { status: 400 });
+        return NextResponse.json(
+          { message: "Poster URL must be a valid URL" },
+          { status: 400 }
+        );
       }
     }
 

@@ -21,6 +21,11 @@ export const movieController = {
     return rows.map((r: any) => normalizeMovie(r));
   },
 
+  async filterMovies(type: string) {
+    const rows = await movieService.filterMovies(type);
+    return rows.map((r: any) => normalizeMovie(r));
+  },
+
   async createMovie(data: any) {
     const row = await movieService.createMovie(data);
     return normalizeMovie(row);

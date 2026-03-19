@@ -72,6 +72,15 @@ export const movieService = {
     return result.rows[0];
   },
 
+  // Filter movies by type
+  async filterMovies(type: string) {
+    const result = await pool.query(
+      `SELECT * FROM movie WHERE type = $1 ORDER BY id DESC`,
+      [type]
+    );
+    return result.rows;
+  },
+
   // Delete movie
   async deleteMovie(id: string | number) {
     await pool.query("DELETE FROM movie WHERE id=$1", [id]);
