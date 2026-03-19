@@ -150,7 +150,6 @@ export default function Home() {
             </button>
           </div>
         )}
-
         <Footer />
       </main>
     </div>
