@@ -10,3 +10,4 @@
 - [ ] Step 5: Verify deployment on Vercel
 
 **Next:** git add . && git commit -m "Fix Next.js output dir for Vercel deploy (.next)" && git push. Vercel will rebuild automatically.
+
