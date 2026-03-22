@@ -1,38 +1,15 @@
-# Fix Vercel Deployment & Data Creation
+# Fix PostgreSQL Connection Error in Production
 
-## Completed
-- [x] next.config.js → default .next (Vercel OK)
-- [x] Local npm run build ✓
-- [x] Committed changes
+## Steps:
+- [x] 1. Create TODO.md with plan breakdown  
+- [x] 2. Update src/lib/db.ts with connection validation and better error handling
+- [x] 3. Create .env.example with production DATABASE_URL template
+- [ ] 4. Set DATABASE_URL in deployment platform dashboard (Vercel/Railway/etc.) to production Postgres URL (e.g., Neon/Supabase) - NO localhost:5432
+- [ ] 5. Redeploy the application  
+- [ ] 6. Test API: curl https://your-app.vercel.app/api/movies
+- [ ] 7. Mark complete
 
-## Fix "can't create data" on Vercel
-**Root Cause:** No DATABASE_URL env var + DB table missing.
-
-**Steps:**
-- [ ] 1. Vercel Dashboard → Project → Settings → Environment Variables
-  ```
-  DATABASE_URL=postgresql://user:pass@host/db?sslmode=require
-  ```
-  (Get from Neon/Supabase/ Railway – copy your local .env)
-
-- [ ] 2. Create table (psql/pgAdmin/Vercel Postgres):
-```sql
-CREATE TABLE IF NOT EXISTS movie (
-  id TEXT PRIMARY KEY DEFAULT gen_random_uuid(),
-  title TEXT NOT NULL,
-  duration TEXT,
-  type TEXT,
-  subtitle TEXT,
-  "videoUrl" TEXT,
-  poster TEXT,
-  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-```
-
-- [ ] 3. Git push: `git push --set-upstream origin main`
-
-- [ ] 4. Test: your-vercel-app.vercel.app/admin → Add movie
-
-**Note:** Uses pg directly (not Prisma). Code logic correct – form posterUrl maps to DB poster.
-
+**Instructions:**
+1. Get free Postgres: Neon.tech or Supabase.com (5min setup)
+2. Copy connection string to platform env vars
+3. Redeploy and test
