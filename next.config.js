@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  distDir: 'build', // optional: only if you really want a custom folder
+  // distDir: 'build', // commented: use default .next for Vercel compatibility
 };
 
 export default nextConfig;

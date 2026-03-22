@@ -1,12 +1,12 @@
-# Movie Type Filter on Home - ✅ COMPLETE
+# Fix Vercel Deployment for Next.js App
 
-## Summary
-- Backend: Added filterMovies(type) exact match via ?type=Action param (service/controller/route). Type filter takes priority over search.
-- Frontend: Styled dropdown "Filter by Type" on home (app/page.tsx) with "All Types" + MOVIE_TYPES. State synced to URL (?type=), combined with search, dynamic title (e.g., "Action Movies"), resets pagination.
-- Fixed: next.config.js ES module export.
-- Tested: Dev server running at http://localhost:3000. Open in browser, select type (e.g., Action), check Network for API ?type=, verify filtered list/badges, test with search.
+## Completed Steps
+- [x] Step 1: Update next.config.js - Remove distDir: 'build' to use default .next output dir
+- [x] Step 2: Clean old build dirs: rm -rf .next build
+- [x] Step 3: Test local build: npm run build (verify .next generated, no errors)
 
-## View Result
-npm run dev (already running) → Open http://localhost:3000
+## Pending Steps
+- [ ] Step 4: Commit/push changes for Vercel auto-deploy
+- [ ] Step 5: Verify deployment on Vercel
 
-Feature ready! Dropdown fetches movie types from API.
+**Next:** git add . && git commit -m "Fix Next.js output dir for Vercel deploy (.next)" && git push. Vercel will rebuild automatically.
